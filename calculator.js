@@ -21,16 +21,28 @@ let num2;
 function operate (operator, num1, num2) {
     switch(operator){
         case "+" :
-            add(num1,num2);
-            break;
+            return add(num1,num2);
         case "-" :
-            subtract(num1,num2);
-            break;
+            return subtract(num1,num2);
         case "*" :
-            multiply(num1,num2);
-            break;
+            return multiply(num1,num2);
         case "/" :
-            divide(num1,num2);
-            break;
+            return divide(num1,num2);
     }
 }
+const display = document.querySelector(".calculator-display");
+
+document.querySelectorAll("button").forEach(button => {
+    button.addEventListener("click", function () {
+        if (this.textContent.trim() == "C"){
+            return display.textContent = ""
+        } else if (this.textContent.trim() == "="){
+            const arr = display.textContent.split(/([^0-9]+)/);
+            num1 = Number(arr[0]);
+            num2 = Number(arr[2]);
+            operator = arr[1];
+            return display.textContent = operate(operator,num1,num2);
+        }
+        display.textContent += this.textContent.trim();
+    })                                                                               
+})
