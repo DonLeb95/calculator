@@ -38,6 +38,15 @@ document.querySelectorAll("button").forEach(button => {
             return display.textContent = ""
         } else if (this.textContent.trim() == "="){
             const arr = display.textContent.split(/([^0-9]+)/);
+            //for operations that contain more than one operator
+            if (arr.length > 3){
+                let nums = arr.filter(numbers => !isNaN(numbers)).map(Number);
+                let oper = arr.filter(operators => isNaN(operators));
+                for(let i = 0;i < oper.length;i++){
+                    nums[i+1] = operate(oper[i],nums[i],nums[i+1]);   
+                }
+                return display.textContent = nums[nums.length - 1]; 
+            }
             num1 = Number(arr[0]);
             num2 = Number(arr[2]);
             operator = arr[1];
