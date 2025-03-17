@@ -37,7 +37,15 @@ document.querySelectorAll("button").forEach(button => {
         if (this.textContent.trim() == "C"){
             return display.textContent = ""
         } else if (this.textContent.trim() == "="){
-            const arr = display.textContent.split(/([^0-9]+)/);
+            const arr = display.textContent.split(/([^\d])/).filter(Boolean);
+
+            //in case of consecutive operator uses and no number post operator
+            const doubleOperatorCheck = arr.map((check,ind) => isNaN(check) && isNaN(arr[ind+1]));
+            const badCalc = doubleOperatorCheck.filter(Boolean);
+            if(badCalc.length > 0){
+                return display.textContent = "You can't calculate that";
+            }
+
             //for operations that contain more than one operator
             if (arr.length > 3){
                 let nums = arr.filter(numbers => !isNaN(numbers)).map(Number);
@@ -47,6 +55,7 @@ document.querySelectorAll("button").forEach(button => {
                 }
                 return display.textContent = nums[nums.length - 1]; 
             }
+
             num1 = Number(arr[0]);
             num2 = Number(arr[2]);
             operator = arr[1];
