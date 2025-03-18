@@ -31,12 +31,14 @@ function operate (operator, num1, num2) {
     }
 }
 const display = document.querySelector(".calculator-display");
-
+let check = false;
 document.querySelectorAll("button").forEach(button => {
     button.addEventListener("click", function () {
         
         if (this.textContent.trim() == "C"){
-            return display.textContent = ""
+            display.textContent = "";
+            check = false;
+            return
         } else if (this.textContent.trim() == "="){
             const arr = display.textContent.split(/([^\d])/).filter(Boolean);
 
@@ -44,7 +46,9 @@ document.querySelectorAll("button").forEach(button => {
             const doubleOperatorCheck = arr.map((check,ind) => isNaN(check) && isNaN(arr[ind+1]));
             const badCalc = doubleOperatorCheck.filter(Boolean);
             if(badCalc.length > 0){
-                return display.textContent = "You can't calculate that";
+                display.textContent = "You can't calculate that";
+                check = false;
+                return;
             }
 
             let nums = arr.filter(numbers => !isNaN(numbers)).map(Number);
@@ -52,8 +56,14 @@ document.querySelectorAll("button").forEach(button => {
             for(let i = 0;i < oper.length;i++){
                 nums[i+1] = operate(oper[i],nums[i],nums[i+1]);   
             }
-            return display.textContent = nums[nums.length - 1]; 
-            }
+            display.textContent = nums[nums.length - 1];
+            check = true;
+            return; 
+        }
+        if (check) {
+            display.textContent = "";
+            check = false;          
+        } 
         display.textContent += this.textContent.trim();
     })                                                                               
 })
