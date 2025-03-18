@@ -38,8 +38,16 @@ document.querySelectorAll("button").forEach(button => {
         if (this.textContent.trim() == "C"){
             display.textContent = "";
             check = false;
-            return
-        } else if (this.textContent.trim() == "="){
+            return;
+        }
+        
+        if (this.textContent.trim() == "Remove"){
+            display.textContent = display.textContent.slice(0,-1);
+            check = false;
+            return;
+        }
+
+        if (this.textContent.trim() == "="){
             const arr = display.textContent.split(/([^\d])/).filter(Boolean);
 
             //in case of consecutive operator uses and no number post operator
@@ -60,10 +68,12 @@ document.querySelectorAll("button").forEach(button => {
             check = true;
             return; 
         }
+
         if (check) {
             display.textContent = "";
             check = false;          
-        } 
+        }
+         
         display.textContent += this.textContent.trim();
     })                                                                               
 })

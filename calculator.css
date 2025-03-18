@@ -43,6 +43,10 @@ body {
     margin-right: 2px; 
 }
 
+#remove{
+    font-size: 12px;
+}
+
 .operator-section{
     display: flex;
     flex-flow: column nowrap;
