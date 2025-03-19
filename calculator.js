@@ -48,7 +48,7 @@ document.querySelectorAll("button").forEach(button => {
         }
 
         if (this.textContent.trim() == "="){
-            const arr = display.textContent.split(/([^\d])/).filter(Boolean);
+            const arr = display.textContent.split(/([^\d.])/).filter(Boolean);
 
             //in case of consecutive operator uses and no number post operator
             const doubleOperatorCheck = arr.map((check,ind) => isNaN(check) && isNaN(arr[ind+1]));
