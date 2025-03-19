@@ -59,6 +59,14 @@ document.querySelectorAll("button").forEach(button => {
                 return;
             }
 
+            const division0Check = arr.map((check,ind) => check + arr[ind+1]);
+            const divBy0 = division0Check.filter(check => check == "/0")
+            if(divBy0.length > 0){
+                display.textContent = "That ain't it dawg";
+                check = false;
+                return;
+            }
+
             let nums = arr.filter(numbers => !isNaN(numbers)).map(Number);
             let oper = arr.filter(operators => isNaN(operators));
             for(let i = 0;i < oper.length;i++){
