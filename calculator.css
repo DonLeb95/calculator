@@ -23,6 +23,7 @@ body {
     background-color: rgb(100,220,100);
     margin: 10px 0px 10px;
     font-size: 30px;
+    overflow: hidden;
 }
 
 .calculator-buttons{
@@ -45,6 +46,7 @@ body {
 
 #remove{
     font-size: 12px;
+    background-color: rgb(225,225,0);
 }
 
 .operator-section{
@@ -59,4 +61,8 @@ body {
     height: 50px;
     width: 44px;
     font-size: 25px;   
+}
+
+#clear{
+    background-color: rgb(255,100,100);
 }
